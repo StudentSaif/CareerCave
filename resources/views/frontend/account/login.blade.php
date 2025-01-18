@@ -4,8 +4,14 @@
     <section class="section-5">
         <div class="container my-5">
             <div class="py-lg-2">&nbsp;</div>
+
             <div class="row d-flex justify-content-center">
                 <div class="col-md-5">
+                    @if (Session::has('success'))
+                        <div class="alert alert-success">
+                            <p>{{ Session::get('success') }}</p>
+                        </div>
+                    @endif
                     <div class="card shadow border-0 p-5">
                         <h1 class="h3">Login</h1>
                         <form action="account.html" method="post">
