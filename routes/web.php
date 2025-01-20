@@ -20,12 +20,19 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::group(['account'], function (  ) {
 
-Route::get('/register', [AccountController::class, 'registration'])->name('account.registration');
-Route::post('/account/registration', [AccountController::class, 'processRegistration'])->name('registration');
+    //Guest route
+    Route::group(['middleware' => 'guest'], function () {
+        Route::get('/account/register', [AccountController::class, 'registration'])->name('account.registration');
+        Route::post('/account/registration', [AccountController::class, 'processRegistration'])->name('registration');
+        Route::get('/account/login', [AccountController::class, 'login'])->name('account.login');
+        Route::post('/account/authenticate', [AccountController::class, 'authenticate'])->name('login');
+    });
 
-Route::get('/login', [AccountController::class, 'login'])->name('account.login');
-Route::post('/account/login', [AccountController::class, 'authenticate'])->name('login');
-
-Route::get('/login/profile', [AccountController::class, 'profile'])->name('login.profile');
-
+    //Authenticated route
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/account/profile', [AccountController::class, 'profile'])->name('login.profile');
+        Route::get('/account/logout', [AccountController::class, 'logout'])->name('logout.profile');
+    });
+});

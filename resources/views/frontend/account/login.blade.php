@@ -12,6 +12,11 @@
                             <p>{{ Session::get('success') }}</p>
                         </div>
                     @endif
+                    @if (Session::has('error'))
+                        <div class="alert alert-danger">
+                            <p>{{ Session::get('error') }}</p>
+                        </div>
+                    @endif
                     <div class="card shadow border-0 p-5">
                         <h1 class="h3">Login</h1>
                         <form action="{{ route('login') }}" method="post">

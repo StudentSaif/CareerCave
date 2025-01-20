@@ -15,7 +15,11 @@
                         <a class="nav-link" aria-current="page" href="jobs.html">Find Jobs</a>
                     </li>
                 </ul>
-                <a class="btn btn-outline-primary me-2" href="{{ route('account.login') }}">Login</a>
+                @if (!Auth::check())
+                    <a class="btn btn-outline-primary me-2" href="{{ route('account.login') }}">Login</a>
+                @else
+                    <a class="btn btn-outline-primary me-2" href="{{ route('login.profile') }}">My Account</a>
+                @endif
                 <a class="btn btn-primary" href="#">Post a Job</a>
             </div>
         </div>

@@ -68,7 +68,7 @@ class AccountController extends Controller
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 return redirect()->route('login.profile');
             } else {
-                return redirect()->route('account.login')->with('errors', 'Email or Password are incorrect');
+                return redirect()->route('account.login')->with('error', 'Email or Password are incorrect');
             }
         } else {
             // echo "please fill your correct credentials";
@@ -83,8 +83,16 @@ class AccountController extends Controller
         }
     }
 
+    // This method redirect on the profile dashboard
     public function profile()
     {
-        echo "user profile page";
+        // return redirect()->route('login.profile');
+        return view('frontend.account.profile');
+    }
+
+    //This method is logout the user and redirect them on home page
+    public function logout() {
+        Auth::logout();
+        return redirect()->route('account.login');
     }
 }
