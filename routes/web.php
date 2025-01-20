@@ -25,3 +25,7 @@ Route::get('/register', [AccountController::class, 'registration'])->name('accou
 Route::post('/account/registration', [AccountController::class, 'processRegistration'])->name('registration');
 
 Route::get('/login', [AccountController::class, 'login'])->name('account.login');
+Route::post('/account/login', [AccountController::class, 'authenticate'])->name('login');
+
+Route::get('/login/profile', [AccountController::class, 'profile'])->name('login.profile');
+
